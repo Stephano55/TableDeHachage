@@ -1,6 +1,4 @@
 import java.util.LinkedList;
-
-import javax.swing.RowFilter.Entry;
 public class TableDeHachage<C,V> {
     private static final int capInitiale = 16;
     private LinkedList<Entry<C,V>>[] tab;
@@ -51,6 +49,31 @@ public class TableDeHachage<C,V> {
         return null;
     }
     public V removeValeur(C cle){
-        
+         int index = hash(cle);
+         if(tab[index]==null){
+            return null;
+         }
+         for (Entry<C,V> entry : tab[index]) {
+            if (entry.cle.equals(cle)) {
+                V valeur = entry.valeur;
+                tab[index].remove(entry);
+                size--;
+            }
+         }
+         return null;
+    }
+    public int getTaille(){
+        return size;
+    }
+    public void afficherTable(){
+        for(int i = 0; i < tab.length; i++){
+            if (tab[i]!=null) {
+                System.out.print("Indice"+i+" :");
+                for (Entry<C,V> entry : tab[i]) {
+                    System.out.print("["+entry.cle+"] = "+entry.valeur);
+                }
+                System.out.println();
+            }
+        }
     }
 }
