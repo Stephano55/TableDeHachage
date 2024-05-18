@@ -35,7 +35,22 @@ public class TableDeHachage<C,V> {
                 return;
             }
         }
-        tab[index].add(entry<>(cle,valeur));
+        tab[index].add(new Entry<>(cle,valeur));
         size++;
+    }
+    public V getValeur(C cle){
+        int index = hash(cle);
+        if(tab[index]==null){
+            return null;
+        }
+        for(Entry<C,V> entry : tab[index]){
+            if (entry.cle.equals(cle)) {
+                return entry.valeur;
+            }
+        }
+        return null;
+    }
+    public V removeValeur(C cle){
+        
     }
 }
